@@ -1,0 +1,54 @@
+{
+  "validation_run": {
+    "id": "3f497c0198c243288a5c130907304dfa",
+    "job": "d2b61ece5190447f9243493fa4d161a9",
+    "config": {
+      "alignment_seconds": 0.017666666666666667,
+      "gap_periods": 1.5,
+      "origin_seconds": 0.001
+    },
+    "result": {
+      "asset_hashes": {
+        "README.md": "74a5ac3cf6de11b315eb4d01b1ce0e6250782fa809183f76b56aaa3d26a63d76",
+        "data/chunk-000/file-000.parquet": "579ad57e2454359fa9f2c0e83525991bd2e0305b7b2914d0b1181da3c6ad9949",
+        "meta/episodes/chunk-000/file-000.parquet": "191998bffd2680c477a4000270cf943bc423ba5fb54ee8b8244b57db062c5209",
+        "meta/info.json": "254909942a6cbfb4692a239e4d0aa5c68ec8eb16f81b6593985ea7f2bb2823e3",
+        "meta/stats.json": "4ae86bed785e0f98914812e87736e216139a22b43cf2b990e68384d85168c3c8",
+        "meta/tasks.parquet": "1040cdef3328ec4376587152647df8e725e80a04210c426f891719e691c88533",
+        "videos/observation.images.side/chunk-000/file-000.mp4": "3b0f30282b21764fad29d46f4133e66e303dfcb95803510c790ca53dfd2bfe50",
+        "videos/observation.images.up/chunk-000/file-000.mp4": "73d93dae2091cb1b11995d17c34f67c1ec18db005e70acdf896d2307b47406d1"
+      },
+      "checks": [
+        "source checksums",
+        "schema and temporal rules",
+        "all source-frame decode scan",
+        "every sample to camera PTS association",
+        "episode-end decode"
+      ],
+      "episodes": 50,
+      "findings": [],
+      "samples": 11939
+    },
+    "created": "2026-10-11T07:05:45.988602+00:00"
+  },
+  "original_stream_scans": [
+    {
+      "source_sha256": "3b0f30282b21764fad29d46f4133e66e303dfcb95803510c790ca53dfd2bfe50",
+      "frames": 11939,
+      "first_pts": 0.0,
+      "last_pts": 397.933333,
+      "codec": "av1",
+      "decode": "all frames; ffmpeg -xerror -err_detect explode",
+      "tool": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    {
+      "source_sha256": "73d93dae2091cb1b11995d17c34f67c1ec18db005e70acdf896d2307b47406d1",
+      "frames": 11939,
+      "first_pts": 0.0,
+      "last_pts": 397.933333,
+      "codec": "av1",
+      "decode": "all frames; ffmpeg -xerror -err_detect explode",
+      "tool": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers"
+    }
+  ]
+}

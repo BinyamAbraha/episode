@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "consumer": "Episode VersionDataset numpy + FFmpeg/1",
+  "lerobot_compatibility": "not tested",
+  "version": "15ff55345d322bbaebaec82b082ec36750442eabdc65cd4bcc48fc643a9663c7",
+  "episodes": 50,
+  "validated_signal_windows": 2961,
+  "decoded_images": 400,
+  "decoded_window_policy": "first complete window of every selected episode; all signal windows checked",
+  "batch_shapes": {
+    "images": [
+      1,
+      2,
+      4,
+      480,
+      640,
+      3
+    ],
+    "state": [
+      1,
+      4,
+      6
+    ],
+    "action": [
+      1,
+      4,
+      6
+    ],
+    "normalized_state": [
+      1,
+      4,
+      6
+    ],
+    "normalized_action": [
+      1,
+      4,
+      6
+    ],
+    "mask": [
+      1,
+      4
+    ]
+  },
+  "split_episodes": {
+    "test": 5,
+    "train": 40,
+    "validation": 5
+  },
+  "max_association_error_seconds": 3.3681030231491604e-07,
+  "seconds": 22.349900749977678,
+  "cache_condition": "OS cache uncontrolled; source hashes read before decoding",
+  "concurrency": 1
+}

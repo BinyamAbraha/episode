@@ -1,0 +1,16 @@
+{
+  "expected": 5,
+  "unexpected": 0,
+  "skipped": 0,
+  "flaky": 0,
+  "duration_ms": 7825.909000000001,
+  "scope": [
+    "real curation and consumer",
+    "filters, faults, comparison, narrow navigation",
+    "desktop inspector",
+    "narrow inspector",
+    "recorded replay"
+  ],
+  "browser": "Playwright Chromium 136 build 1169; Playwright 1.52.0",
+  "accessibility": "axe WCAG 2 A/AA and 2.1 AA; no violations in exercised views"
+}

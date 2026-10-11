@@ -1,0 +1,13 @@
+{
+  "tracked_files": 63,
+  "status": "passed",
+  "checks": [
+    "private path exclusion",
+    "symlink exclusion",
+    "bulk and size policy",
+    "credential patterns",
+    "personal paths",
+    "writing punctuation",
+    "local public links"
+  ]
+}

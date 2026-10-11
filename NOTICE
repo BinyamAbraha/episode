@@ -1,0 +1,12 @@
+Episode
+
+Source recordings and metadata used by the example adapter:
+lerobot/svla_so101_pickplace, published on Hugging Face by lerobot.
+Pinned revision: f641879e22172be7e8161d5e6c1503c2d2feb657.
+https://huggingface.co/datasets/lerobot/svla_so101_pickplace
+The dataset card declares Apache License 2.0.
+
+Source assets are preserved. Public preview excerpts are modified by clipping
+episode intervals and transcoding AV1 to VP9/WebM. Transformation records retain
+source/output hashes, offsets and settings. Screenshots show these recordings
+inside the Episode interface. No publisher endorsement is implied.

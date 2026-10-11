@@ -1,0 +1,151 @@
+{
+  "generated": "2026-10-11T07:05:36.967496+00:00",
+  "hardware": {
+    "processor": "Apple M4",
+    "memory_bytes": 17179869184,
+    "os": "27.0",
+    "architecture": "arm64"
+  },
+  "software": {
+    "python": "3.11.15",
+    "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "packages": [
+      "annotated-types==0.8.0",
+      "anyio==4.15.1",
+      "certifi==2026.7.22",
+      "click==8.5.0",
+      "fastapi==0.115.12",
+      "h11==0.16.0",
+      "httpcore==1.0.9",
+      "httpx==0.28.1",
+      "idna==3.20",
+      "iniconfig==2.3.1",
+      "numpy==2.2.6",
+      "packaging==26.3",
+      "pillow==11.2.1",
+      "pluggy==1.6.0",
+      "pyarrow==20.0.0",
+      "pydantic==2.11.5",
+      "pydantic_core==2.33.2",
+      "pytest==8.3.5",
+      "starlette==0.46.2",
+      "typing-inspection==0.4.4",
+      "typing_extensions==4.16.0",
+      "uvicorn==0.34.2"
+    ]
+  },
+  "dataset": {
+    "revision": "f641879e22172be7e8161d5e6c1503c2d2feb657",
+    "episodes": 50,
+    "samples": 11939,
+    "cameras": 2,
+    "source_bytes": 86123896,
+    "version": "6e4cdb5a4269ab76d9c54ab695774f4197b3e65b3bed9f1b26e7e8ecdcd23326"
+  },
+  "concurrency": 1,
+  "cold_cache": "Not measured. No machine-wide cache flush performed. First measured calls are not claimed as cold.",
+  "metrics": {
+    "catalog_filter": {
+      "first_measured_ms": 1.8139589810743928,
+      "repeat_median_ms": 0.8113539661280811,
+      "repeat_p95_ms": 1.0274590458720922,
+      "samples_ms": [
+        1.8139589810743928,
+        1.0274590458720922,
+        0.945833045989275,
+        0.930250040255487,
+        0.8960840059444308,
+        0.8660419844090939,
+        0.8824580581858754,
+        0.8049999596551061,
+        0.8167499909177423,
+        0.8971670176833868,
+        0.8059579413384199,
+        0.7924999808892608,
+        0.8614999242126942,
+        0.7997079519554973,
+        0.7782919565215707,
+        1.018292037770152,
+        0.7778329309076071,
+        0.7758749416097999,
+        0.7690410129725933,
+        0.7568750297650695,
+        0.7654590299353004
+      ],
+      "runs": 21,
+      "cache": "first measured call and subsequent repeats; OS and app caches not flushed"
+    },
+    "episode_open": {
+      "first_measured_ms": 5.870375083759427,
+      "repeat_median_ms": 5.384312535170466,
+      "repeat_p95_ms": 5.625999998301268,
+      "samples_ms": [
+        5.870375083759427,
+        5.625999998301268,
+        5.4475420620292425,
+        5.410875077359378,
+        5.432208068668842,
+        5.357749992981553,
+        5.302582983858883,
+        5.470791016705334,
+        5.2586670499295,
+        5.3434999426826835,
+        5.279417033307254
+      ],
+      "runs": 11,
+      "cache": "first measured call and subsequent repeats; OS and app caches not flushed"
+    },
+    "decoded_frame": {
+      "first_measured_ms": 64.09050000365824,
+      "repeat_median_ms": 60.468645475339144,
+      "repeat_p95_ms": 67.27791705634445,
+      "samples_ms": [
+        64.09050000365824,
+        61.320125008933246,
+        60.521540930494666,
+        60.41575002018362,
+        67.27791705634445,
+        60.88679097592831,
+        60.13458303641528,
+        59.97116700746119,
+        60.38383301347494
+      ],
+      "runs": 9,
+      "cache": "first measured call and subsequent repeats; OS and app caches not flushed"
+    },
+    "decoded_training_window": {
+      "first_measured_ms": 439.3474169773981,
+      "repeat_median_ms": 434.5839794841595,
+      "repeat_p95_ms": 435.31808292027563,
+      "samples_ms": [
+        439.3474169773981,
+        435.31808292027563,
+        434.8172090249136,
+        433.1930000334978,
+        434.3507499434054
+      ],
+      "runs": 5,
+      "cache": "first measured call and subsequent repeats; OS and app caches not flushed"
+    },
+    "repeat_import": {
+      "seconds": 6.007797917001881,
+      "episodes_per_second": 8.322516950595418,
+      "samples_per_second": 1987.250597463174,
+      "scope": "queue to completed reimport; assets, previews and full-stream scan caches already present; includes hash checks, signal rules, PTS association and endpoint decodes",
+      "job": "d2b61ece5190447f9243493fa4d161a9"
+    }
+  },
+  "memory": {
+    "benchmark_process_peak_rss_bytes": 132481024,
+    "scope": "macOS ru_maxrss bytes for benchmark Python process; excludes API and worker. No whole-application peak claim."
+  },
+  "disk": {
+    "sources": 86127753,
+    "derived": 51722683,
+    "cache": 957729987,
+    "venv": 197936229,
+    "web-tools": 109520444,
+    "runtime": 1655720,
+    "evidence": 2405711
+  }
+}

@@ -1,0 +1,22 @@
+name: Verify Episode
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  fixtures-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.lock
+      - run: python -m black --check episode tests scripts
+      - run: python -m pytest -q -p no:cacheprovider
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix web --no-audit --no-fund
+      - run: npm run --prefix web format:check
+      - run: npm run --prefix web build

@@ -1,0 +1,7 @@
+# Timing and validation contract
+
+Source timestamps are relative sample times. Episode time starts at its first sample. Video presentation time is camera metadata start offset plus episode-relative time. Source nominal 30 FPS does not prove physical camera synchronization. Check declared sample identities, monotonic timestamps, gaps over 1.5 nominal periods, metadata boundaries, media PTS coverage and decodability. Nearest sample selection uses a half-period tolerance plus 1 ms for floating-point rounding. No interpolation across gaps is permitted.
+
+Preview seeking is browser-approximate. Precise inspection uses decoded frames with selected PTS evidence; the implementation checks selected versus decoded PTS within 1 ms and reports timing headers. This does not make browser seeking frame-accurate. Preview VP9/WebM derivatives record source hash, FFmpeg version and settings. Training reads original recordings independently of preview transformations.
+
+Findings include stable rule ID, severity (error, warning, descriptive), episode, interval, observed value, threshold and explanation. Required rules cover schema, independent state/action dimensions and dtypes, nonfinite values, boundaries, missing assets, ordering, gaps, duplicate sample identities, duration/offset coverage and decode failures. Low motion is descriptive, not an overall score. Controlled faults are separately labelled and never replace source files. Shifted sequences can be detected against declared relative origins, not as a general proof of semantic synchronization.

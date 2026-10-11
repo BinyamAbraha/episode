@@ -1,0 +1,7 @@
+# Curation and consumer contract
+
+Review events append revisions with accepted, excluded or unreviewed state, reason and independent unknown/success/failure outcome. Interval annotations append labelled intervals and notes. Saved criteria are mutable queries; reevaluation creates a new immutable version, never changes a published one. Preview reports selected and excluded counts.
+
+Versions snapshot exact episode membership, relevant asset hashes, annotation revisions, source metadata and all transform/split settings. Deterministic hash ordering with a recorded seed assigns whole episode groups to train/validation/test. Known exact duplicate families stay together. Unknown sessions remain unknown; no session separation or exhaustive near-duplicate claim is made. Small selections require at least three groups for three nonempty splits.
+
+Consumer windows contain consecutive samples from one episode and one split. Default policy drops incomplete windows; no padding or interpolation. State at t is paired with recorded action at t, without an undocumented physical causality claim. Normalization mean/std is fitted only on selected training samples; zero variance uses scale 1. Consumer verification reads preserved signals and decodes associated original images, checking shape, dtype, boundaries, memberships and timing. A custom consumer is not labelled LeRobot-compatible without an executed pinned-reader check.

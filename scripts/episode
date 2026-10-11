@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+PROJECT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+EPISODE_STORAGE=${EPISODE_STORAGE:-/Volumes/External Storage/Episode}
+export EPISODE_STORAGE
+export PYTHONPATH="$PROJECT_ROOT${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONDONTWRITEBYTECODE=1
+export TMPDIR="$EPISODE_STORAGE/tmp"
+exec "$EPISODE_STORAGE/venv/bin/python" -B -m episode.cli "$@"
