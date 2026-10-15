@@ -4,7 +4,7 @@ Implemented: environment/storage diagnostics; pinned-source contracts; one-episo
 
 Evidence: [verification](verification.md), [benchmark report](benchmarks.md), [source provenance](provenance.md), [operations](operations.md).
 
-Prepared but not executed remotely: fixture-only CI and public replay hosting. No public deployment is claimed.
+The [public repository](https://github.com/BinyamAbraha/episode) is published and fixture-only CI has passed remotely; see [verification](verification.md). Public replay hosting remains prepared but unpublished. No public backend deployment is claimed.
 
 Optional future work: persistent batched video decoding after measurement, additional format adapters, session-aware grouping when real session metadata exists, explicit annotation supersession/editing, multiuser authentication and transaction architecture, and small CPU prediction experiments. Kubernetes, distributed queues, broad cloud deployments and large policy training are outside this release.
 

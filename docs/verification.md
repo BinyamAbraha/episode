@@ -18,7 +18,7 @@ Synthetic tests cover independent state/action dimensions, required fields, orde
 
 Routine fixture tests stub media decoding; real integration checks separately execute FFmpeg. The consumer scans every signal window but decodes a bounded window from each episode. All-frame scan results do not establish physical camera synchronization. Automated accessibility is supplemented by rendered desktop/narrow review, but manual screen-reader testing was not performed.
 
-A pinned LeRobot reader, fresh-machine installation, physical drive unplug during processing, policy training, robot task-success evaluation, true cold-cache performance and remote CI execution were not run. Storage-loss behavior was tested with controlled failures without disconnecting the user's drive. The prepared CI workflow runs small fixtures and builds; no remote success is claimed before execution.
+A pinned LeRobot reader, fresh-machine installation, physical drive unplug during processing, policy training, robot task-success evaluation, true cold-cache performance were not run. Storage-loss behavior was tested with controlled failures without disconnecting the user's drive. The CI workflow runs small fixtures and builds; the first remote result is recorded below.
 
 The public-index release audit passed, including private paths, symlinks, bulk/size checks, credential patterns, personal paths and local documentation links. Pinned Black and Prettier checks passed. The final `make test` and `make build` commands were also exercised successfully.
 
@@ -31,3 +31,5 @@ The counts above describe the original release. The extension adds OpenCV diagno
 Publication checks inspect staged file contents and all reachable Git history for private paths, bulk artifacts, personal absolute paths, and credential patterns. They also check public Markdown links and file sizes. These checks reduce accidental disclosure risk; pattern matching is not a guarantee that every possible credential is detected. CI runs the audit with full checkout history.
 
 The publication pass ran `make analysis-test`: 34 passed in 2.41 seconds with one upstream deprecation warning. Black, Prettier and the production frontend build passed. The new regression test checks that staged credentials remain detectable when the working copy is clean, and that deleted private files remain detectable in history. Browser journeys, model inference and performance benchmarks were not repeated for this documentation and release-tooling change; their earlier evidence remains labelled separately.
+
+Remote CI passed for publication commit `7ec6d4b`: [Verify Episode run](https://github.com/BinyamAbraha/episode/actions/runs/38784693494). It executed the complete-history audit, backend fixture tests, Black, Prettier and the frontend build on a GitHub-hosted Ubuntu runner. It did not download the real dataset or execute the optional local model and browser integration suite.
