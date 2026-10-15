@@ -25,3 +25,9 @@ The public-index release audit passed, including private paths, symlinks, bulk/s
 ## Assisted analysis extension
 
 The counts above describe the original release. The extension adds OpenCV diagnostics, local model execution, reviewed suggestions and version provenance. Final optional backend verification: 33 passed; core-only verification: 30 passed, three optional analysis tests skipped. The expanded browser suite exercises six journeys, including approved edited labels, rejection, frozen provenance and recorded model replay. See [analysis results](analysis-results.md) for measured resources, exact scope and unexecuted human evaluation. Public release checks are repeated for the extension.
+
+## Public repository preparation
+
+Publication checks inspect staged file contents and all reachable Git history for private paths, bulk artifacts, personal absolute paths, and credential patterns. They also check public Markdown links and file sizes. These checks reduce accidental disclosure risk; pattern matching is not a guarantee that every possible credential is detected. CI runs the audit with full checkout history.
+
+The publication pass ran `make analysis-test`: 34 passed in 2.41 seconds with one upstream deprecation warning. Black, Prettier and the production frontend build passed. The new regression test checks that staged credentials remain detectable when the working copy is clean, and that deleted private files remain detectable in history. Browser journeys, model inference and performance benchmarks were not repeated for this documentation and release-tooling change; their earlier evidence remains labelled separately.

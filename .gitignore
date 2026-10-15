@@ -11,3 +11,21 @@ web/dist/
 web/test-results/
 web/playwright-report/
 .DS_Store
+
+# Local configuration, credentials, and generated bulk artifacts
+.env.*
+!.env.example
+*.pem
+*.key
+.venv-*/
+.coverage
+htmlcov/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.parquet
+*.mp4
+*.webm
+*.safetensors
+*.xcresult/

@@ -17,11 +17,17 @@ A local robotics episode inspector and dataset curation tool. Inspect two camera
 
 The backend is for local use. No robot controller, policy training, cloud deployment or LeRobot-reader compatibility is claimed.
 
+## Engineering evidence
+
+The implemented release has 34 passing backend tests in the optional analysis environment and six recorded browser journeys. The full-source consumer checked 2,961 signal windows and decoded 400 representative original images across all 50 episodes. These are local results, not model-accuracy or robot-success measurements. See the [technical case study](docs/case-study.md), [verification scope](docs/verification.md), and [demo walkthrough](docs/demo.md).
+
 ## Run locally
 
 Verified environment: Apple M4, macOS 27.0, Python 3.11.15, Node 22.16.0 and FFmpeg/ffprobe 8.1.2. Install these prerequisites separately if absent. Setup changes project-owned paths only.
 
 ```sh
+git clone https://github.com/BinyamAbraha/episode.git
+cd episode
 export EPISODE_STORAGE="/Volumes/External Storage/Episode"
 python3.11 scripts/setup.py --init-storage
 ./scripts/episode doctor
@@ -30,9 +36,11 @@ python3.11 scripts/setup.py --init-storage
 python3.11 scripts/start.py --port 8765
 ```
 
+Choose an empty project-owned bulk-storage directory outside the clone; the external-drive path above is an example. The optional MLX model path requires Apple silicon.
+
 Open `http://127.0.0.1:8765`. Setup keeps environments, package caches, browser binaries, source assets and temporary files in `EPISODE_STORAGE`. It refuses to adopt a nonempty unmarked directory. Reserve at least 2 GiB for setup. The pinned source files total about 82 MiB; shared shards are downloaded even for a three-episode import.
 
-Once the worker is running, `./scripts/episode import --limit 50` queues the full catalog import. `./scripts/episode validate` queues source integrity and validation checks using the same idempotent path. Only one worker may own a storage root. Use another port if 8765 is occupied.
+The one-shot worker above exits after the first import. The startup command then owns a persistent API and worker. In another terminal with the same `EPISODE_STORAGE`, `./scripts/episode import --limit 50` queues the full catalog import. `./scripts/episode validate` queues source integrity and validation checks using the same idempotent path. Only one worker may own a storage root. Use another port if 8765 is occupied.
 
 ## Local model-assisted analysis
 
@@ -84,7 +92,7 @@ python3.11 -m http.server 8767 --bind 127.0.0.1 \
   --directory "$EPISODE_STORAGE/evidence/replay"
 ```
 
-Browser integration tests require the real import, running API/worker, and generated replay served on port 8767. They append clearly labelled demonstration reviews and versions. Routine CI runs small synthetic backend fixtures and the frontend build without downloading the dataset. See [verification evidence](docs/verification.md) and [benchmarks](docs/benchmarks.md).
+Browser integration tests require the real import, running API/worker, and generated replay served on port 8767. They append clearly labelled demonstration reviews and versions. Routine CI runs small synthetic backend fixtures and the frontend build without downloading the dataset. Use an isolated test catalog to preserve personal reviews; see [verification evidence](docs/verification.md) and [benchmarks](docs/benchmarks.md).
 
 The generated replay is read-only and visibly records its source version and generation time. It includes attributed excerpts and saved results, with no simulated job or review writes. No public URL is configured in this repository. See the [demo journey](docs/demo.md).
 

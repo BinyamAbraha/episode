@@ -1,6 +1,7 @@
 {
-  "tracked_files": 63,
+  "tracked_files": 85,
   "status": "passed",
+  "history_commits_checked": 2,
   "checks": [
     "private path exclusion",
     "symlink exclusion",
