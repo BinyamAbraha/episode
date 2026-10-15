@@ -47,6 +47,8 @@ CREATE TABLE IF NOT EXISTS validation_runs(id TEXT PRIMARY KEY, job TEXT, config
 CREATE TABLE IF NOT EXISTS verifications(id INTEGER PRIMARY KEY, version TEXT, result TEXT, created TEXT);
 """
 
+SCHEMA += "\nCREATE TABLE IF NOT EXISTS analyses(id TEXT PRIMARY KEY, episode INTEGER NOT NULL, mode TEXT NOT NULL, result TEXT NOT NULL, created TEXT NOT NULL);\nCREATE TABLE IF NOT EXISTS suggestions(id TEXT PRIMARY KEY, analysis TEXT NOT NULL REFERENCES analyses(id), episode INTEGER NOT NULL, body TEXT NOT NULL);\nCREATE TABLE IF NOT EXISTS suggestion_decisions(id INTEGER PRIMARY KEY, suggestion TEXT UNIQUE NOT NULL REFERENCES suggestions(id), decision TEXT NOT NULL, reason TEXT NOT NULL, annotation INTEGER REFERENCES annotations(id), created TEXT NOT NULL);\n"
+
 
 def connect():
     db = sqlite3.connect(root() / "runtime/catalog.sqlite", timeout=10)

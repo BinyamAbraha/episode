@@ -21,3 +21,7 @@ Routine fixture tests stub media decoding; real integration checks separately ex
 A pinned LeRobot reader, fresh-machine installation, physical drive unplug during processing, policy training, robot task-success evaluation, true cold-cache performance and remote CI execution were not run. Storage-loss behavior was tested with controlled failures without disconnecting the user's drive. The prepared CI workflow runs small fixtures and builds; no remote success is claimed before execution.
 
 The public-index release audit passed, including private paths, symlinks, bulk/size checks, credential patterns, personal paths and local documentation links. Pinned Black and Prettier checks passed. The final `make test` and `make build` commands were also exercised successfully.
+
+## Assisted analysis extension
+
+The counts above describe the original release. The extension adds OpenCV diagnostics, local model execution, reviewed suggestions and version provenance. Final optional backend verification: 33 passed; core-only verification: 30 passed, three optional analysis tests skipped. The expanded browser suite exercises six journeys, including approved edited labels, rejection, frozen provenance and recorded model replay. See [analysis results](analysis-results.md) for measured resources, exact scope and unexecuted human evaluation. Public release checks are repeated for the extension.

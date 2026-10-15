@@ -4,7 +4,7 @@ test("recorded replay discloses provenance, plays real clips and shows verificat
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto("http://127.0.0.1:8767");
+  await page.goto(process.env.EPISODE_REPLAY_URL || "http://127.0.0.1:8767");
   await expect(
     page.getByText("Read-only recorded data. No live processing."),
   ).toBeVisible();
@@ -45,7 +45,28 @@ test("recorded replay discloses provenance, plays real clips and shows verificat
     expect(a.violations).toEqual([]);
   }
   await expect(page.locator("#verification")).toContainText("passed:");
+  await page
+    .getByRole("button", { name: "5. Recorded model suggestions", exact: true })
+    .click();
+  await expect(page.locator("#analysis-source")).toContainText(
+    "Model mlx-community",
+  );
+  await expect(
+    page.locator("#analysis-suggestions article").first(),
+  ).toContainText("Review required");
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze()
+    ).violations,
+  ).toEqual([]);
   await page.setViewportSize({ width: 390, height: 844 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBeTruthy();
   await page
     .getByRole("button", { name: "1. Inspect recording", exact: true })
     .click();

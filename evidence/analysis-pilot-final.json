@@ -1,0 +1,79 @@
+{
+  "schema": "episode.analysis-evaluation/1",
+  "created": "2026-10-15T12:04:53.846171+00:00",
+  "reference_sha256": "8c0775c917cbc5a3f82ed5e58e0c6fe5f56cd6bc5d31aef3653dfea12585654d",
+  "human_reference_episodes": 0,
+  "status": "not evaluated: human references not supplied",
+  "outcome_agreement": null,
+  "non_abstaining_coverage": null,
+  "confusion": {},
+  "interval_tolerance_seconds": 0.5,
+  "interval_precision": null,
+  "interval_recall": null,
+  "matched_intervals": 0,
+  "predicted_intervals": 0,
+  "reference_intervals": 0,
+  "human_review_time_savings": null,
+  "limitations": [
+    "Small single-task sample; no population accuracy claim.",
+    "Human origin is reviewer attestation, not independently verified.",
+    "Review-time savings require a separate timed human study."
+  ],
+  "pilot": [
+    {
+      "episode": 0,
+      "analysis_id": "8a55cb53b5a9df7886c9f57acb0cdae2aa778b6753e3663f7edf7fc99b3f5b13",
+      "seconds": 15.566558749997057,
+      "inference_seconds": 13.583407541969791,
+      "peak_process_rss_bytes": 1651097600,
+      "peak_mlx_memory_bytes": 4591288100,
+      "attempts": 1,
+      "suggestions": 3,
+      "model_output_error": null
+    },
+    {
+      "episode": 1,
+      "analysis_id": "d56b33bd77ab02424a4ec795254c840c68030cd209ec6b151386a0644f3d86f8",
+      "seconds": 11.9827614169335,
+      "inference_seconds": 10.691985708894208,
+      "peak_process_rss_bytes": 1651097600,
+      "peak_mlx_memory_bytes": 4591304268,
+      "attempts": 1,
+      "suggestions": 3,
+      "model_output_error": null
+    },
+    {
+      "episode": 2,
+      "analysis_id": "d2b74c72cb9bed2053aae465bc721c1600df8829efd512ee62d956227ec31880",
+      "seconds": 15.310097334091552,
+      "inference_seconds": 14.004363500047475,
+      "peak_process_rss_bytes": 1651097600,
+      "peak_mlx_memory_bytes": 4591304268,
+      "attempts": 1,
+      "suggestions": 3,
+      "model_output_error": null
+    },
+    {
+      "episode": 3,
+      "analysis_id": "ccf9e6272c3bf44205bdc3f91eb280341e54793f533b76ddfb7e6421e277a274",
+      "seconds": 12.001002999953926,
+      "inference_seconds": 10.71260629198514,
+      "peak_process_rss_bytes": 1651097600,
+      "peak_mlx_memory_bytes": 4591304632,
+      "attempts": 1,
+      "suggestions": 3,
+      "model_output_error": null
+    },
+    {
+      "episode": 4,
+      "analysis_id": "9bf133f958a5025e8fedb4e5c99c64c0bca52c07c683c0a2f9fe8e5b71cfa12b",
+      "seconds": 13.24665979098063,
+      "inference_seconds": 11.912257582996972,
+      "peak_process_rss_bytes": 1651097600,
+      "peak_mlx_memory_bytes": 4591305000,
+      "attempts": 1,
+      "suggestions": 2,
+      "model_output_error": null
+    }
+  ]
+}

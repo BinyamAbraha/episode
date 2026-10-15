@@ -687,3 +687,74 @@ pre {
     transition: none !important;
   }
 }
+
+.analysis-section {
+  margin-top: 32px;
+  min-width: 0;
+}
+.analysis-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.analysis-section .panel {
+  margin: 16px 0;
+}
+.suggestion {
+  border-top: 1px solid var(--border, #c8d1cb);
+  padding: 16px 0;
+}
+.evidence-strip {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  max-width: 100%;
+  padding-bottom: 8px;
+}
+.evidence-strip button {
+  flex: 0 0 180px;
+  padding: 4px;
+}
+.evidence-strip img {
+  display: block;
+  width: 170px;
+  height: auto;
+}
+.contact-sheet {
+  width: 100%;
+  height: auto;
+}
+.analysis-section details {
+  margin: 12px 0;
+}
+.analysis-section pre {
+  max-height: 400px;
+  overflow: auto;
+}
+.analysis-section table {
+  min-width: 650px;
+}
+.analysis-section .table-scroll {
+  overflow: auto;
+}
+.analysis-section h4 {
+  margin: 8px 0;
+}
+@media (max-width: 700px) {
+  .analysis-section .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .analysis-actions {
+    flex-direction: column;
+  }
+}
+
+.annotation,
+.suggestion,
+.analysis-section p {
+  overflow-wrap: anywhere;
+}
+.analysis-section select {
+  max-width: 100%;
+}

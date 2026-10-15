@@ -31,3 +31,22 @@ Source paths come from a tracked source lock, not user-supplied file paths. Each
 Version creation holds a SQLite write transaction while checking preserved asset hashes, capturing curation state, assigning splits and computing statistics. This intentionally favors a consistent small-data snapshot over concurrent write throughput. The measured catalog latency does not justify adding an analytical query service for this release.
 
 The manifest consumer accepts an exported JSON file and source root. It checks source hashes, independently reads metadata and episode rows, and yields explicit window identities, masks, normalized/raw signals and original decoded images. It does not consult current catalog reviews. Verification records are separate from immutable content so adding a later measurement cannot alter a dataset version.
+
+## Optional local analysis
+
+The durable worker supervises an isolated Python subprocess containing OpenCV and MLX-VLM. Source hashes and original-media PTS remain authoritative. Derived frame evidence feeds deterministic diagnostics and a sparse model contact sheet. Strict JSON/evidence validation gates suggestion publication. Full output attempts, settings and artifact hashes remain available. A bounded repair attempt can fix malformed responses but cannot prove their visual interpretation.
+
+The API reads immutable analyses and pending suggestions. Explicit accept/edit/reject decisions append transactional history; accepted intervals become annotations. New dataset versions include the linked analysis provenance. The core environment does not import the heavy inference libraries. See [analysis contract](analysis-contract.md) and [measured results](analysis-results.md).
+
+```mermaid
+flowchart LR
+  S[Preserved source and PTS] --> D[Sampled RGB evidence]
+  D --> CV[OpenCV diagnostics]
+  D --> VLM[Offline pinned VLM]
+  VLM --> G[Schema and evidence validation]
+  G --> A[Immutable analysis and pending suggestions]
+  CV --> A
+  A --> UI[Inspector evidence review]
+  UI --> H[Explicit decision and approved annotation]
+  H --> V[Immutable dataset version provenance]
+```

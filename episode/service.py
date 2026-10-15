@@ -69,7 +69,7 @@ def update_job(id, stage, completed=0, total=0):
 
 
 def enqueue(kind="import", args=None):
-    if kind not in ["import", "verify"]:
+    if kind not in ["import", "verify", "analyze"]:
         raise ValueError("Unknown job kind")
     id = uuid.uuid4().hex
     with connect() as db:
@@ -283,6 +283,25 @@ def import_source(job, limit=50):
     }
 
 
+def has_annotation(eid, label):
+    with connect() as db:
+        return bool(
+            db.execute(
+                "SELECT 1 FROM annotations WHERE episode=? AND label=?", (eid, label)
+            ).fetchone()
+        )
+
+
+def has_pending(eid):
+    with connect() as db:
+        return bool(
+            db.execute(
+                "SELECT 1 FROM suggestions s LEFT JOIN suggestion_decisions d ON d.suggestion=s.id WHERE s.episode=? AND d.id IS NULL",
+                (eid,),
+            ).fetchone()
+        )
+
+
 def catalog(criteria=None):
     c = criteria or {}
     with connect() as db:
@@ -303,6 +322,12 @@ def catalog(criteria=None):
             or c["search"].lower() in (str(e["id"]) + " " + e["task"]).lower()
         )
         and (not c.get("review") or e["review"] == c["review"])
+        and (not c.get("outcome") or e["outcome"] == c["outcome"])
+        and (
+            not c.get("annotation_label")
+            or has_annotation(e["id"], c["annotation_label"])
+        )
+        and (not c.get("pending_suggestions") or has_pending(e["id"]))
         and (not c.get("findings") or e["findings"] > 0)
         and (not c.get("valid_only") or e["errors"] == 0)
         and e["duration"] >= float(c.get("min_duration", 0))
@@ -421,6 +446,8 @@ def create_version(name, criteria, seed=17):
                 "samples": len(a),
             }
         ids = [e["id"] for e in chosen]
+        from .analysis import snapshot
+
         manifest = {
             "schema": "episode.version/1",
             "adapter": "lerobot-v3-pinned/1",
@@ -442,6 +469,7 @@ def create_version(name, criteria, seed=17):
                 for r in rows(db, "SELECT * FROM reviews ORDER BY id")
                 if r["episode"] in ids
             ],
+            "analysis_provenance": snapshot(db, ids),
             "annotations": [
                 a
                 for a in rows(db, "SELECT * FROM annotations ORDER BY id")

@@ -9,7 +9,7 @@ test("complete real-data curation journey produces verified immutable version", 
   for (const id of [0, 1, 2]) {
     await page.goto("/?view=catalog&episode=" + id);
     await page
-      .getByLabel("Review reason")
+      .getByLabel("Review reason", { exact: true })
       .fill(
         "Automated demonstration review: video and signals inspected; task outcome remains unknown.",
       );

@@ -15,3 +15,7 @@ Run the local API and worker, with all 50 episodes imported.
 `scripts/build_replay.py` generates `evidence/replay` under configured external storage. It selects a successfully verified version, extracts two real episode-0 clips, and copies recorded manifest/consumer evidence. The visible banner includes the version ID and generation time. Sections describe recorded curation and verification; no review form or job control pretends to write to a live backend.
 
 Serve it with the README command. The replay is a hosting-ready directory, not a claimed deployment. Retain `LICENSE`, `ATTRIBUTION.txt`, `record.json` and `transforms.json` with the clips. The source card declares Apache-2.0. Clip and screenshot review found a robot/tabletop scene with no visible personal identifiers; retain source attribution and do not imply endorsement.
+
+## Recorded model-assisted review
+
+The inspector includes Analysis and suggestions. Select a local VLM run, inspect its timestamped contact sheet and click evidence thumbnails to seek the recording. Compare a suggested interval with the original video. Accept, edit or reject only after review, with a reason; episode outcome remains separate. Create a new dataset version to freeze approved annotation provenance. The public replay's fifth section presents recorded, unverified model suggestions and has no live inference or approval controls.

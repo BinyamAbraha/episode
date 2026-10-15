@@ -11,6 +11,7 @@ A local robotics episode inspector and dataset curation tool. Inspect two camera
 - Durable single-worker jobs, atomic catalog publication, idempotent imports, cancellation and restart recovery.
 - Explainable rules and separately labelled fault fixtures. No unexplained quality score.
 - Review history, interval annotations, saved criteria, immutable manifests and version comparison.
+- Optional local OpenCV diagnostics and Qwen3-VL suggestions with evidence, explicit approval and immutable analysis provenance.
 - Whole-episode and exact sequence-family splits, training-only normalization and a standalone manifest consumer.
 - Tested desktop/narrow browser journeys, accessibility checks, measured local benchmarks and a read-only replay generator.
 
@@ -32,6 +33,19 @@ python3.11 scripts/start.py --port 8765
 Open `http://127.0.0.1:8765`. Setup keeps environments, package caches, browser binaries, source assets and temporary files in `EPISODE_STORAGE`. It refuses to adopt a nonempty unmarked directory. Reserve at least 2 GiB for setup. The pinned source files total about 82 MiB; shared shards are downloaded even for a three-episode import.
 
 Once the worker is running, `./scripts/episode import --limit 50` queues the full catalog import. `./scripts/episode validate` queues source integrity and validation checks using the same idempotent path. Only one worker may own a storage root. Use another port if 8765 is occupied.
+
+## Local model-assisted analysis
+
+[Analysis setup and workflow](docs/analysis.md) · [Analysis contract](docs/analysis-contract.md) · [Measured analysis results](docs/analysis-results.md)
+
+```sh
+python3.11 scripts/setup_analysis.py
+"$EPISODE_STORAGE/analysis-venv/bin/python" -B scripts/download_model.py
+./scripts/episode analyze --mode diagnostics --all
+./scripts/episode analyze --mode vlm --episodes 0 1 2 3 4
+```
+
+The existing worker processes these jobs. In the inspector, open Analysis and suggestions to inspect evidence and accept, edit or reject a proposed interval. This uses a separate external environment and a pinned local model. Model suggestions are hypotheses; human semantic accuracy and review-time savings have not been evaluated. No paid inference service is required.
 
 ## Curation and consumer
 

@@ -8,6 +8,21 @@ def main():
     s = p.add_subparsers(dest="command", required=True)
     s.add_parser("doctor")
     s.add_parser("validate")
+    analysis = s.add_parser("analyze")
+    analysis.add_argument("--episodes", type=int, nargs="+", default=[0, 1, 2, 3, 4])
+    analysis.add_argument(
+        "--mode", choices=["diagnostics", "vlm"], default="diagnostics"
+    )
+    analysis.add_argument("--all", action="store_true")
+    results = s.add_parser("analysis-results")
+    results.add_argument("episode", type=int)
+    decisions = s.add_parser("suggestion-review")
+    decisions.add_argument("id")
+    decisions.add_argument("decision", choices=["accept", "edit", "reject"])
+    decisions.add_argument("--reason", required=True)
+    decisions.add_argument("--label")
+    decisions.add_argument("--start", type=float)
+    decisions.add_argument("--end", type=float)
     c = s.add_parser("cleanup")
     c.add_argument("--apply", action="store_true")
     i = s.add_parser("import")
@@ -19,6 +34,7 @@ def main():
     v = s.add_parser("version")
     v.add_argument("name")
     v.add_argument("--accepted-only", action="store_true")
+    v.add_argument("--selection", type=int)
     q = s.add_parser("verify")
     q.add_argument("version")
     x = s.add_parser("export")
@@ -45,12 +61,48 @@ def main():
     sel = s.add_parser("selection")
     sel.add_argument("name")
     sel.add_argument("--review", default="")
+    sel.add_argument("--outcome", choices=["unknown", "success", "failure"], default="")
+    sel.add_argument("--annotation-label", default="")
+    sel.add_argument("--pending-suggestions", action="store_true")
     cp = s.add_parser("compare")
     cp.add_argument("left")
     cp.add_argument("right")
     args = p.parse_args()
     from . import service
 
+    if args.command == "analysis-results":
+        from .analysis import list_analyses
+
+        print(json.dumps(list_analyses(args.episode), indent=2))
+        return
+    if args.command == "analyze":
+        if args.all:
+            args.episodes = [e["id"] for e in service.catalog()]
+        if not set(args.episodes) <= {e["id"] for e in service.catalog()}:
+            raise ValueError("Episode not imported")
+        print(
+            enqueue(
+                "analyze",
+                {"episodes": list(dict.fromkeys(args.episodes)), "mode": args.mode},
+            )
+        )
+        return
+    if args.command == "suggestion-review":
+        from .analysis import decide
+
+        print(
+            json.dumps(
+                decide(
+                    args.id,
+                    args.decision,
+                    args.reason,
+                    args.label,
+                    args.start,
+                    args.end,
+                )
+            )
+        )
+        return
     if args.command == "catalog":
         print(
             json.dumps(
@@ -73,7 +125,13 @@ def main():
         print("Annotation appended")
         return
     if args.command == "selection":
-        criteria = {"review": args.review, "valid_only": True}
+        criteria = {
+            "review": args.review,
+            "valid_only": True,
+            "outcome": args.outcome,
+            "annotation_label": args.annotation_label,
+            "pending_suggestions": args.pending_suggestions,
+        }
         with connect() as db:
             db.execute(
                 "INSERT INTO selections(name,criteria,created) VALUES(?,?,?)",
@@ -107,8 +165,9 @@ def main():
                             "normalization",
                             "reviews",
                             "annotations",
+                            "analysis_provenance",
                         ]
-                        if a[k] != b[k]
+                        if a.get(k) != b.get(k)
                     ],
                 },
                 indent=2,
@@ -147,12 +206,18 @@ def main():
 
         uvicorn.run("episode.api:app", host="127.0.0.1", port=args.port)
     elif args.command == "version":
-        print(
-            create_version(
-                args.name,
-                {"review": "accepted"} if args.accepted_only else {"valid_only": True},
-            )
+        criteria = (
+            {"review": "accepted"} if args.accepted_only else {"valid_only": True}
         )
+        if args.selection:
+            with connect() as db:
+                row = db.execute(
+                    "SELECT criteria FROM selections WHERE id=?", (args.selection,)
+                ).fetchone()
+            if not row:
+                raise ValueError("Selection not found")
+            criteria = json.loads(row[0])
+        print(create_version(args.name, criteria))
     elif args.command == "verify":
         print(json.dumps(verify_version(args.version), indent=2))
     elif args.command == "export":

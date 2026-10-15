@@ -16,3 +16,10 @@ browser-test:
 	PLAYWRIGHT_BROWSERS_PATH="$(STORAGE)/cache/browsers" TMPDIR="$(STORAGE)/tmp" npm run --prefix web test
 benchmark:
 	"$(PY)" -B scripts/benchmark.py
+
+analysis-setup:
+	python3.11 scripts/setup_analysis.py
+analysis-test:
+	"$(STORAGE)/analysis-venv/bin/python" -B -m pytest -q -p no:cacheprovider --basetemp "$(STORAGE)/tmp/pytest-analysis"
+analysis-benchmark:
+	"$(PY)" -B scripts/benchmark_analysis.py

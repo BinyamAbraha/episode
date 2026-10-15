@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./style.css";
+import { Analysis } from "./Analysis";
 type Row = {
   id: number;
   task: string;
@@ -968,6 +969,13 @@ function Inspector({
           </details>
         </aside>
       </div>
+      <Analysis
+        id={id}
+        revision={revision}
+        seek={seek}
+        request={api}
+        action={action}
+      />
     </>
   );
 }
@@ -1005,7 +1013,17 @@ function Selections({
   const { data, error } = useData("/selections", revision);
   const [name, setName] = useState("");
   const [review, setReview] = useState("");
-  const preview = useSelectionPreview({ review, valid_only: true }, revision);
+  const [annotationLabel, setAnnotationLabel] = useState("");
+  const [outcome, setOutcome] = useState("");
+  const [pending, setPending] = useState(false);
+  const criteria = {
+    review,
+    valid_only: true,
+    annotation_label: annotationLabel,
+    outcome,
+    pending_suggestions: pending,
+  };
+  const preview = useSelectionPreview(criteria, revision);
   return (
     <>
       <div className="eyebrow">CURATION</div>
@@ -1022,7 +1040,7 @@ function Selections({
             () =>
               api("/selections", {
                 name,
-                criteria: { review, valid_only: true },
+                criteria,
               }),
             "Selection saved.",
           );
@@ -1043,6 +1061,31 @@ function Selections({
             <option value="accepted">Accepted</option>
             <option value="unreviewed">Unreviewed</option>
           </select>
+        </label>
+        <label>
+          Annotation label
+          <input
+            value={annotationLabel}
+            onChange={(e) => setAnnotationLabel(e.target.value)}
+            placeholder="Exact approved label"
+          />
+        </label>
+        <label>
+          Reviewed outcome
+          <select value={outcome} onChange={(e) => setOutcome(e.target.value)}>
+            <option value="">Any outcome</option>
+            <option value="success">Success</option>
+            <option value="failure">Failure</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={pending}
+            onChange={(e) => setPending(e.target.checked)}
+          />
+          Has pending model suggestions
         </label>
         <button>Save criteria</button>
       </form>

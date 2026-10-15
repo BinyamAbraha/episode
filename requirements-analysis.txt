@@ -1,0 +1,8 @@
+-r requirements.txt
+mlx-vlm==0.3.4
+mlx-lm==0.28.3
+mlx==0.29.3
+transformers==4.57.1
+opencv-python==4.12.0.88
+torch==2.9.1
+torchvision==0.24.1

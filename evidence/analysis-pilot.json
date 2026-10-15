@@ -1,0 +1,69 @@
+{
+  "schema": "episode.analysis-evaluation/1",
+  "created": "2026-10-14T15:10:51.314762+00:00",
+  "reference_sha256": "8c0775c917cbc5a3f82ed5e58e0c6fe5f56cd6bc5d31aef3653dfea12585654d",
+  "human_reference_episodes": 0,
+  "status": "not evaluated: human references not supplied",
+  "outcome_agreement": null,
+  "non_abstaining_coverage": null,
+  "confusion": {},
+  "interval_tolerance_seconds": 0.5,
+  "interval_precision": null,
+  "interval_recall": null,
+  "matched_intervals": 0,
+  "predicted_intervals": 0,
+  "reference_intervals": 0,
+  "human_review_time_savings": null,
+  "limitations": [
+    "Small single-task sample; no population accuracy claim.",
+    "Human origin is reviewer attestation, not independently verified.",
+    "Review-time savings require a separate timed human study."
+  ],
+  "pilot": [
+    {
+      "episode": 0,
+      "analysis_id": "975732b407ed58197f5267abac09d863350d174b89877f2311cd3fbccf9b9862",
+      "seconds": 15.828676791046746,
+      "inference_seconds": 13.064537958940491,
+      "peak_process_rss_bytes": 609730560,
+      "suggestions": 3,
+      "model_output_error": null
+    },
+    {
+      "episode": 1,
+      "analysis_id": "10384f7449c0d5319347bbb8cba69a37a0e8e85181eb3e039728f1125f1f9863",
+      "seconds": 9.046163958031684,
+      "inference_seconds": 7.759735874948092,
+      "peak_process_rss_bytes": 609730560,
+      "suggestions": 0,
+      "model_output_error": "1 validation error for ModelOutput\nsuggestions.0.evidence\n  Field required [type=missing, input_value={'label': 'outcome', 'sta...evidence of placement.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+    },
+    {
+      "episode": 2,
+      "analysis_id": "4f8347f46de4e1e795efeebc89bca9ce02ea3b469ae379e5fab0f757469fc636",
+      "seconds": 16.17429849994369,
+      "inference_seconds": 14.740994125022553,
+      "peak_process_rss_bytes": 613138432,
+      "suggestions": 4,
+      "model_output_error": null
+    },
+    {
+      "episode": 3,
+      "analysis_id": "7040c5911858eacafac69df1de1289d72ce88c9435a455add08fb71864a71cfd",
+      "seconds": 12.68767450004816,
+      "inference_seconds": 10.754895541002043,
+      "peak_process_rss_bytes": 613138432,
+      "suggestions": 0,
+      "model_output_error": "4 validation errors for ModelOutput\nsuggestions.0.explanation\n  Field required [type=missing, input_value={'label': 'grasp_attempt'...p-0', 'side-2', 'up-2']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nsuggestions.1.explanation\n  Field required [type=missing, input_value={'label': 'transport', 's...ce': ['side-5', 'up-5']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nsuggestions.2.explanation\n  Field required [type=missing, input_value={'label': 'release', 'sta...ce': ['side-7', 'up-7']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nsuggestions.3.evidence\n  Field required [type=missing, input_value={'label': 'outcome', 'sta...the outcome uncertain.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+    },
+    {
+      "episode": 4,
+      "analysis_id": "5745771127ba89be3937b90c407b992fadd4eb9e07066d7b7ac38252b64cab1a",
+      "seconds": 15.573826832929626,
+      "inference_seconds": 14.25293483294081,
+      "peak_process_rss_bytes": 613138432,
+      "suggestions": 4,
+      "model_output_error": null
+    }
+  ]
+}

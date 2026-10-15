@@ -1,0 +1,22 @@
+{
+  "stats": {
+    "startTime": "2026-10-15T14:46:35.351Z",
+    "duration": 10317.856999999996,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    "real model evidence and approved edited interval",
+    "rejection history",
+    "immutable model provenance",
+    "selection filtering",
+    "real consumer verification",
+    "desktop and narrow inspector",
+    "keyboard controls",
+    "WCAG A/AA axe checks",
+    "recorded replay with model disclosure"
+  ],
+  "catalog": "isolated test copy; real reviews unchanged"
+}

@@ -61,6 +61,9 @@ def selection_preview(b: dict):
 def catalog(
     search: str = "",
     review: str = "",
+    outcome: str = "",
+    annotation_label: str = "",
+    pending_suggestions: bool = False,
     findings: bool = False,
     min_duration: float = 0,
     max_duration: float = 1e9,
@@ -71,6 +74,9 @@ def catalog(
         dict(
             search=search,
             review=review,
+            outcome=outcome,
+            annotation_label=annotation_label,
+            pending_suggestions=pending_suggestions,
             findings=findings,
             min_duration=min_duration,
             max_duration=max_duration,
@@ -203,8 +209,9 @@ def compare(left: str, right: str):
                 "transforms",
                 "reviews",
                 "annotations",
+                "analysis_provenance",
             ]
-            if a[k] != b[k]
+            if a.get(k) != b.get(k)
         ],
     }
 
@@ -259,6 +266,64 @@ def fixtures():
     from .fixtures import demonstrations
 
     return demonstrations()
+
+
+class Analyze(BaseModel):
+    mode: Literal["diagnostics", "vlm"] = "diagnostics"
+    episodes: list[int] = Field(min_length=1, max_length=50)
+
+
+@app.post("/api/analysis-jobs")
+def analyze_job(b: Analyze):
+    ids = list(dict.fromkeys(b.episodes))
+    available = {x["id"] for x in svc.catalog()}
+    if any(i not in available for i in ids):
+        raise ValueError("Episode not imported")
+    return {"id": svc.enqueue("analyze", {"episodes": ids, "mode": b.mode})}
+
+
+@app.get("/api/episodes/{id}/analyses")
+def analyses(id: int):
+    from .analysis import list_analyses
+
+    return list_analyses(id)
+
+
+@app.get("/api/analyses/{id}/evidence/{filename}")
+def analysis_evidence(id: str, filename: str):
+    import re
+
+    if not re.fullmatch(r"[0-9a-f]{64}", id):
+        raise HTTPException(404)
+    with connect() as db:
+        row = db.execute("SELECT result FROM analyses WHERE id=?", (id,)).fetchone()
+    if not row:
+        raise HTTPException(404)
+    result = json.loads(row[0])
+    allowed = {x["file"]: x["sha256"] for x in result["evidence"]}
+    if "contact_sheet_sha256" in result:
+        allowed["contact-sheet.png"] = result["contact_sheet_sha256"]
+    if filename not in allowed:
+        raise HTTPException(404)
+    path = root() / "derived/analysis" / id / filename
+    if digest(path) != allowed[filename]:
+        raise ValueError("Evidence checksum mismatch")
+    return FileResponse(path, media_type="image/png")
+
+
+class Decision(BaseModel):
+    decision: Literal["accept", "edit", "reject"]
+    reason: str = Field(min_length=1, max_length=2000)
+    label: str | None = Field(default=None, max_length=100)
+    start: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+    end: float | None = Field(default=None, gt=0, allow_inf_nan=False)
+
+
+@app.post("/api/suggestions/{id}/decision")
+def suggestion_decision(id: str, b: Decision):
+    from .analysis import decide
+
+    return decide(id, **b.model_dump())
 
 
 DIST = Path(__file__).resolve().parents[1] / "web/dist"

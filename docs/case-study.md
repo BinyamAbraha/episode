@@ -21,3 +21,11 @@ See [verification](verification.md) for executed tests and [benchmarks](benchmar
 ## Remaining limits
 
 The adapter intentionally supports one pinned source contract. The source contains one task, lacks session/units/synchronization metadata, and does not justify broad robot compatibility claims. Per-frame FFmpeg processes are simple to verify but unsuitable as a high-throughput training design without further measurement and optimization. Multiuser authorization, additional formats and distributed processing remain future work.
+
+## Evidence-linked local analysis
+
+The analysis extension addresses the gap between technical integrity and behavioral interpretation. OpenCV computes sparse image diagnostics; a pinned local Qwen3-VL model proposes intervals from timestamped camera evidence. Strict validation rejects malformed citations and intervals. A reviewer must approve or edit suggestions before they become annotations, and new dataset versions preserve both the original model statement and the recorded decision.
+
+The isolated inference environment keeps heavy processor dependencies out of the core application. A single supervised subprocess bounds concurrency and supports cancellation. Eight model-visible frames per episode reduce cost but can miss fast manipulation events. The application therefore exposes source video alongside evidence and preserves unknown outcomes.
+
+Full-dataset diagnostics covered 50 episodes and 800 samples in 57.98 summed processing seconds. The final five-episode development pilot produced 14 schema-valid suggestions with 10.69 to 14.00 seconds of inference per episode. The initial pilot rejected malformed outputs, motivating an audited repair path. These are processing and output-validity results; semantic accuracy and reviewer time savings still require human evaluation. See [analysis results](analysis-results.md).

@@ -7,3 +7,9 @@ Evidence: [verification](verification.md), [benchmark report](benchmarks.md), [s
 Prepared but not executed remotely: fixture-only CI and public replay hosting. No public deployment is claimed.
 
 Optional future work: persistent batched video decoding after measurement, additional format adapters, session-aware grouping when real session metadata exists, explicit annotation supersession/editing, multiuser authentication and transaction architecture, and small CPU prediction experiments. Kubernetes, distributed queues, broad cloud deployments and large policy training are outside this release.
+
+## Assisted analysis release
+
+Implemented: isolated local model environment, pinned weights and hashes, full-dataset sparse diagnostics, five-episode VLM pilot, evidence-linked suggestions, explicit review decisions, annotation-aware selections and immutable provenance, local evaluation tooling, browser/accessibility checks and recorded replay extension. [Contract](analysis-contract.md), [usage](analysis.md), [measurements and limits](analysis-results.md).
+
+Not evaluated: semantic accuracy against human references, held-out phase/outcome performance and human review-time savings. Reference labels require a human reviewer. Segmentation, embeddings and VLA/policy training remain optional deferred extensions.

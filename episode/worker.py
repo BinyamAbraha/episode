@@ -44,11 +44,16 @@ def run(once=False):
                 continue
             try:
                 args = json.loads(row["args"])
-                result = (
+                if row["kind"] == "analyze":
+                    from .analysis import supervise
+
+                    supervise(row["id"])
+                elif row["kind"] == "import":
                     import_source(row["id"], args.get("limit", 50))
-                    if row["kind"] == "import"
-                    else verify_version(args["version"], row["id"])
-                )
+                elif row["kind"] == "verify":
+                    verify_version(args["version"], row["id"])
+                else:
+                    raise ValueError("Unknown job kind")
                 state = "succeeded"
                 error = None
             except InterruptedError as e:
